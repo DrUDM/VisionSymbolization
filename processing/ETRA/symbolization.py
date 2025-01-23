@@ -98,7 +98,7 @@ def process_subset(config, path,
     None.
 
     ''' 
-    bkpt_path = 'output/results/ETRA/segmentation/'
+    bkpt_path = 'output/ETRA/segmentation/'
  
     if type_=='scanpath':
         n_centers = config['symbolization']['nb_clusters']['scanpath']     
@@ -201,7 +201,7 @@ def process_subset(config, path,
             #print(rez) 
             #for i in range(n_centers):
             #    print(rez.count(i))
-            filename = '{outpath}/{subject}_{type_}.pkl'.format(outpath='output/results/ETRA/symbolization', 
+            filename = '{outpath}/{subject}_{type_}.pkl'.format(outpath='output/ETRA/symbolization', 
                                                                 subject=subject,
                                                                 type_=type_)
             with open(filename, 'wb') as fp:
@@ -296,14 +296,14 @@ def process_subset(config, path,
         #print(rez) 
         #for i in range(n_centers):
         #    print(rez.count(i))
-        filename = '{outpath}/{type_}.pkl'.format(outpath='output/results/ETRA/symbolization',  
+        filename = '{outpath}/{type_}.pkl'.format(outpath='output/ETRA/symbolization',  
                                                   type_=type_)
         with open(filename, 'wb') as fp:
             pickle.dump(result_dict, fp)   
        
         
            
-    #with open('output/results/ETRA/symbolization/009_AoI.pkl', 'rb') as f:
+    #with open('output/ETRA/symbolization/009_AoI.pkl', 'rb') as f:
     #    data = pickle.load(f)
     #print(data)
              

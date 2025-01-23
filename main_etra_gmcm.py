@@ -43,7 +43,7 @@ def feature_normalization(config=None):
         with open('configurations/analysis_etra.yaml', 'r') as file:
             config = yaml.safe_load(file)
             
-    path = 'output/results/ETRA/features/'
+    path = 'output/ETRA/features/'
     feature_records = [f for f in os.listdir(path) if f[-4:] == '.csv']
 
     nm.process(config, path, feature_records)
@@ -62,7 +62,7 @@ def segmentation(config=None):
         with open('configurations/analysis_etra.yaml', 'r') as file:
             config = yaml.safe_load(file) 
         
-    path = 'output/results/ETRA/normalized_features/'
+    path = 'output/ETRA/normalized_features/'
     feature_records = [f for f in os.listdir(path) if f[-4:] == '.csv']
 
     sg.process(config, path, feature_records)
@@ -81,7 +81,7 @@ def symbolization(config=None):
         with open('configurations/analysis_etra.yaml', 'r') as file:
             config = yaml.safe_load(file) 
             
-    path = 'output/results/ETRA/normalized_features/'
+    path = 'output/ETRA/normalized_features/'
     feature_records = [f for f in os.listdir(path) if f[-4:] == '.csv']
 
     gmcm_sy.process(config, path, feature_records)
@@ -100,7 +100,7 @@ def clustering(config=None):
         with open('configurations/analysis_etra.yaml', 'r') as file:
             config = yaml.safe_load(file) 
             
-    path = 'output/results/ETRA/symbolization_GMCM/'
+    path = 'output/ETRA/symbolization_GMCM/'
     symb_results = [f for f in os.listdir(path) if f[-4:] == '.pkl']
    
     cl = ClusteringGMCM(config, path, symb_results)

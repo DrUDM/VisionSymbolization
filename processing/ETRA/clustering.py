@@ -212,7 +212,7 @@ class Clustering():
                       cmap='Blues')
        
             plt.show() 
-            disp.figure_.savefig('output/results/ETRA/figures/clustering/longitudinal_knn_accuracy_{s_}.png'.format(s_=subject), 
+            disp.figure_.savefig('output/ETRA/figures/clustering/longitudinal_knn_accuracy_{s_}.png'.format(s_=subject), 
                                  dpi=250)
             plt.clf()
             
@@ -381,7 +381,7 @@ class Clustering():
                   cmap='Blues')
    
         plt.show() 
-        disp.figure_.savefig('output/results/ETRA/figures/clustering/svm_accuracy_{n}.png'.format(n=len(conditions)), 
+        disp.figure_.savefig('output/ETRA/figures/clustering/svm_accuracy_{n}.png'.format(n=len(conditions)), 
                              dpi=250)
         plt.clf()
     
@@ -531,48 +531,11 @@ class Clustering():
    
         plt.show()
         #fig = plt.gcf()
-        disp.figure_.savefig('output/results/ETRA/figures/clustering/knn_accuracy_{n}.png'.format(n=len(conditions)), 
+        disp.figure_.savefig('output/ETRA/figures/clustering/knn_accuracy_{n}.png'.format(n=len(conditions)), 
                              dpi=250)
         plt.clf()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 def process(config, path, 
             symbolization_results):

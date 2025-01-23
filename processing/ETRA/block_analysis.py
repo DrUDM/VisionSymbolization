@@ -113,7 +113,7 @@ def process_oculomotor_features_(segmentation, config, record):
             result_df.loc[len(result_df), :] = line
             pass 
  
-    filename='output/results/ETRA/features/{r_}_oculomotor.csv'.format(r_=record.split('.')[0])
+    filename='output/ETRA/features/{r_}_oculomotor.csv'.format(r_=record.split('.')[0])
     result_df.to_csv(filename, index=False)
     
          
@@ -173,7 +173,7 @@ def process_scanpath_features_(segmentation, config, record):
             result_df.loc[len(result_df), :] = line
             pass 
  
-    filename='output/results/ETRA/features/{r_}_scanpath.csv'.format(r_=record.split('.')[0])
+    filename='output/ETRA/features/{r_}_scanpath.csv'.format(r_=record.split('.')[0])
     result_df.to_csv(filename, index=False)           
             
             
@@ -233,7 +233,7 @@ def process_aoi_features_(segmentation, config, record):
             result_df.loc[len(result_df), :] = line
             pass 
              
-    filename='output/results/ETRA/features/{r_}_AoI.csv'.format(r_=record.split('.')[0])
+    filename='output/ETRA/features/{r_}_AoI.csv'.format(r_=record.split('.')[0])
     result_df.to_csv(filename, index=False)  
     
     

@@ -166,7 +166,7 @@ def process_normalization(config, path,
                 new_data.update({feature: ts})
                 
         new_df = pd.DataFrame.from_dict(new_data)    
-        filename = 'output/results/ETRA/normalized_features/{f_}.csv'.format(f_=file) 
+        filename = 'output/ETRA/normalized_features/{f_}.csv'.format(f_=file) 
         new_df.to_csv(filename, index=False)
                 
                 
@@ -200,7 +200,7 @@ def lognormal_uniformization(time_series,
         if name is not None:
             plt.title(name.split('_')[-1])
             fig = plt.gcf()
-            path= 'output/results/ETRA/figures/normalization/'
+            path= 'output/ETRA/figures/normalization/'
             fig.savefig(path+name)
             
         plt.show() 
@@ -241,7 +241,7 @@ def empirical_cdf(time_series,
         if name is not None:
             plt.title(name.split('_')[-1])
             fig = plt.gcf()
-            path= 'output/results/ETRA/figures/normalization/'
+            path= 'output/ETRA/figures/normalization/'
             fig.savefig(path+name)
             
         plt.show() 

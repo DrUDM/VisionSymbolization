@@ -241,7 +241,7 @@ class ClusteringGMCM():
                   colorbar=False, 
                   cmap='Blues') 
         plt.show() 
-        disp.figure_.savefig('output/results/ETRA/figures/clustering/copula_svm_accuracy_{n}.png'.format(n=len(conditions)), 
+        disp.figure_.savefig('output/ETRA/figures/clustering/copula_svm_accuracy_{n}.png'.format(n=len(conditions)), 
                              dpi=250)
         plt.clf()
     

@@ -68,7 +68,7 @@ def process_aoi(config, path, feature_records,
 
     '''
     nb_bkps = config['symbolization']['segmentation']['aoi']['nb_breakpoints']
-    outpath = 'output/results/ETRA/segmentation/'
+    outpath = 'output/ETRA/segmentation/'
     
     for record in feature_records: 
         subject, trial, task, condition, stimulus, _ = record.split('.')[0].split('_')
@@ -115,7 +115,7 @@ def process_scanpath(config, path, feature_records,
 
     '''
     nb_bkps = config['symbolization']['segmentation']['scanpath']['nb_breakpoints']
-    outpath = 'output/results/ETRA/segmentation/'
+    outpath = 'output/ETRA/segmentation/'
     
     for record in feature_records: 
         subject, trial, task, condition, stimulus, _ = record.split('.')[0].split('_')
@@ -163,7 +163,7 @@ def process_oculomotor(config, path, feature_records,
 
     '''
     nb_bkps = config['symbolization']['segmentation']['oculomotor']['nb_breakpoints']
-    outpath = 'output/results/ETRA/segmentation/'
+    outpath = 'output/ETRA/segmentation/'
  
     for record in feature_records: 
         subject, trial, task, condition, stimulus, _ = record.split('.')[0].split('_')

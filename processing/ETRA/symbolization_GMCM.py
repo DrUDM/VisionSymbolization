@@ -73,7 +73,7 @@ def process_subset(config, path,
                    display=True):
      
         
-    bkpt_path = 'output/results/ETRA/segmentation/'
+    bkpt_path = 'output/ETRA/segmentation/'
  
     if type_=='scanpath':
         nb_centers = config['symbolization']['nb_clusters']['scanpath']     
@@ -169,7 +169,7 @@ def process_subset(config, path,
             result_dict['recordings'][name].update({'sequence': ordered_labs_, 
                                                     'lengths': lengths})
             
-        filename = '{outpath}/{type_}.pkl'.format(outpath='output/results/ETRA/symbolization_GMCM',  
+        filename = '{outpath}/{type_}.pkl'.format(outpath='output/ETRA/symbolization_GMCM',  
                                                   type_=type_)
         with open(filename, 'wb') as fp:
             pickle.dump(result_dict, fp)   

@@ -1,0 +1,114 @@
+
+data: 
+    subject_set: ['0', '1', '2', '3', '4', '5', '6', '7', '9', 
+                  '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', 
+                  '20', '21', '22', '23', '24', '25', '26', '27', '28', '29']  #['009', '019', '022', '058', '059', '060', '062', 'SMC']  
+    label_set: ['kdrive_baseline_1', 'kdrive_baseline_2',
+               'kdrive_test_2', 'kdrive_test_3']
+               #'nback_baseline_2', 'nback_test_1',
+               #'nback_test_2', 'nback_test_3' ]
+    condition_set: [ 'low_wl', 'high_wl']  
+    
+    
+    oculomotor_features: [
+'startTime(s)', 'fixFreq', 'fixVel', 'fixDriftDisplacement', 'fixDriftDist', 'fixDriftVel', 'fixBCEA', #'  
+'sacFreq', 'sacAmp',   'sacEfficiency',  
+'sacPeakVel' , 'sacPeakAcc', 'sacSkewnessExponent', 'sacPeakVelAmpRatio'   
+              ]
+     
+    scanpath_features: [
+'startTime(s)', 'SpLength', 'SpBCEA' , 'SpConvexHull', 'SpFractalDimension', #'SpKCoefficient','SpVoronoi', 
+'SpRQARecRate', 'SpRQADet', 'SpRQALam', 
+              ]
+              
+    aoi_features: [
+'startTime(s)', 'AoINumber',  
+'AoIBCEA', 'AoIBCEADisp', 
+'AoILempelZiv',  
+'AoIStationaryEntropy', 'AoIJointEntropy',
+ 'AoIConditionalEntropy' ,  'AoIMutualInformation' #
+              ]
+
+general: 
+    oculomotor_partition_length: 5
+    scanpath_partition_length: 20
+    aoi_partition_length: 20
+    
+    oculomotor_seg_shift: 1
+    scanpath_seg_shift: 1
+    aoi_seg_shift: 1
+    
+    interpolate_values: False
+    available_value_prop: !!float .5
+    available_segment_min: 30
+    
+    sampling_frequency: 250
+    segmentation_method: I_VT
+    distance_type: euclidean 
+    
+    size_plan_x: !!float 4.5
+    size_plan_y: !!float 3.5 
+    
+symbolization: 
+    normalization: all
+    normalization_method: empirical
+    binning: False
+    
+    segmentation:
+        oculomotor:
+            nb_breakpoints: 9 #9 
+        scanpath:
+            nb_breakpoints: 9 #9 
+        aoi:
+            nb_breakpoints: 9 #9 
+            
+    nb_clusters:
+        oculomotor: 15 #25
+        scanpath: 15
+        aoi: 15
+        
+    gmcm: 
+        master_stepsize: !!float .5e-3 #.5e-3  
+        nb_steps: 350
+        distance: wasserstein
+        
+clustering: 
+    edit_distance:
+        deletion_cost: !!float 1
+        insertion_cost: !!float 1
+        normalization: max
+    
+    method: svm
+    k_nn: 4
+    
+ADAM:
+    beta_1: !!float .95
+    beta_2: !!float .95
+     
+    
+ 
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

@@ -14,7 +14,7 @@ from sklearn.svm import SVC
 from sklearn.manifold import MDS 
 
 from weighted_levenshtein import lev 
-from Vision.utils.binning import aoi_dict_dist_mat
+from vision_toolkit.utils.binning import aoi_dict_dist_mat
 from processing.c_comparison_algorithms import c_comparison_algorithms as c_comparison
 
 

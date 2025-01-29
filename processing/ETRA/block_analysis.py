@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd  
 import copy 
 
-import Vision as v
+import vision_toolkit as v
  
  
              
@@ -27,9 +27,9 @@ def new_process(config, path, records):
     None.
 
     '''
-    process_oculomotor=False 
+    process_oculomotor=True 
     process_scanpath=True
-    process_aoi=False 
+    process_aoi=True 
     
     for record in sorted(records):   
         subject, trial, task, condition, stimulus = record.split('.')[0].split('_')
@@ -234,6 +234,7 @@ def process_aoi_features_(segmentation, config, record):
             pass 
              
     filename='output/ETRA/features/{r_}_AoI.csv'.format(r_=record.split('.')[0])
+  
     result_df.to_csv(filename, index=False)  
     
     
@@ -315,7 +316,7 @@ def update_segmentation_results(segmentation_results,
         DESCRIPTION.
 
     '''
-    from Vision.utils.segmentation_utils import centroids_from_ints
+    from vision_toolkit.utils.segmentation_utils import centroids_from_ints
  
     f_ints = segmentation_results['fixation_intervals']
     s_ints = segmentation_results['saccade_intervals']
@@ -362,6 +363,7 @@ def fixation_features(segmentation):
     fix_features.append(fix_a.fixation_drift_velocities(get_raw=False)['drift_velocity_mean']) 
     fix_features.append(fix_a.fixation_BCEA(BCEA_probability=.68, 
                                             get_raw=False)['average_BCEA']) 
+     
     return fix_features
 
  
@@ -398,7 +400,7 @@ def saccade_features(segmentation):
     sac_features.append(sac_a.saccade_peak_accelerations(get_raw=False)['peak_acceleration_mean'])
     sac_features.append(sac_a.saccade_skewness_exponents(get_raw=False)['skewness_exponent_mean'])
     sac_features.append(sac_a.saccade_peak_velocity_amplitude_ratios(get_raw=False)['ratio_mean'])
-      
+     
     return sac_features
 
 
@@ -427,20 +429,24 @@ def scanpath_features(segmentation):
                                   verbose=False) 
     scan_features.append(geo_a.scanpath_length()['length'])
     scan_features.append(geo_a.scanpath_BCEA(BCEA_probability=.68, 
-                                             display_results=False)['BCEA'])
+                                             display_results=False, 
+                                             display_path=False)['BCEA'])
     scan_features.append(geo_a.scanpath_convex_hull(display_results=False, 
-                                                    get_raw=False)['hull_area'])
+                                                    get_raw=False, 
+                                                    display_path=False)['hull_area'])
     scan_features.append(geo_a.scanpath_HFD(HFD_hilbert_iterations=4, 
                                             HFD_k_max=10, 
                                             display_results=False, 
-                                            get_raw=False)['fractal_dimension'])
+                                            get_raw=False, 
+                                            display_path=False)['fractal_dimension'])
     #scan_features.append(np.exp(geo_a.scanpath_k_coefficient(display_results=False)['k_coefficient']))
     #scan_features.append(geo_a.scanpath_voronoi_cells(display_results=False, 
     #                                                  get_raw=False)['gamma_parameter'])
     ## Compute RQA descriptors
     rqa_a = v.RQAAnalysis(scanpath,  
                           verbose=False, 
-                          display_results=False)
+                          display_results=False, 
+                          scanpath_RQA_distance_threshold = 55)
     scan_features.append(rqa_a.scanapath_RQA_recurrence_rate(display_results=False)['RQA_recurrence_rate'])
     scan_features.append(rqa_a.scanapath_RQA_laminarity(display_results=False)['RQA_laminarity']) 
     scan_features.append(rqa_a.scanapath_RQA_determinism(display_results=False)['RQA_determinism'])
@@ -464,11 +470,12 @@ def aoi_features(segmentation):
 
     ''' 
     aoi_features = []
+    
     aoi = v.AoISequence(segmentation, 
                         AoI_identification_method='I_MS',
                         display_AoI_identification=False,  
                         verbose=False) 
-    
+  
     ## Add basic descriptors
     basic_a = v.AoIBasicAnalysis(aoi, 
                                  verbose=False)
@@ -480,23 +487,25 @@ def aoi_features(segmentation):
     aoi_features.append(basic_a.AoI_BCEA(BCEA_probability=.68, 
                                          get_raw=False)['disp_BCEA'])
     #aoi_features.append(basic_a.AoI_weighted_BCEA(BCEA_probability=.68)['average_weighted_BCEA'])
- 
+    
     ## Add lempl ziv complexity 
-    lz = v.LemplZiv(aoi)
-    aoi_features.append(lz.results['AoI_lempel_ziv_complexity'])
- 
+    lz = v.AoI_lempel_ziv(aoi)
+    aoi_features.append(lz['AoI_lempel_ziv_complexity'])
+    
     ## Compute various entropies
-    markov_a = v.MarkovBasedAnalysis(aoi, 
-                                     verbose=False, 
-                                     display_results=False, 
-                                     display_AoI_identification=False)  
-    entropies = markov_a.AoI_transition_entropy() 
-    aoi_features.append(np.exp(entropies['AoI_transition_stationary_entropy']))
-    aoi_features.append(np.exp(entropies['AoI_transition_joint_entropy']))
-    aoi_features.append(np.exp(entropies['AoI_transition_conditional_entropy']))
-    aoi_features.append(np.exp(entropies['AoI_transition_mutual_information']))
-     
+    # markov_a = v.MarkovBasedAnalysis(aoi, 
+    #                                  verbose=False, 
+    #                                  display_results=False, 
+    #                                  display_AoI_identification=False)  
+    # entropies = markov_a.AoI_transition_entropy() 
+ 
+    # aoi_features.append(np.exp(entropies['AoI_transition_stationary_entropy']))
+    # aoi_features.append(np.exp(entropies['AoI_transition_joint_entropy']))
+    # aoi_features.append(np.exp(entropies['AoI_transition_conditional_entropy']))
+    # aoi_features.append(np.exp(entropies['AoI_transition_mutual_information']))
+    #print(aoi_features)
     return aoi_features
+    
     
     
     

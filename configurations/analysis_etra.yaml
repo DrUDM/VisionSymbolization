@@ -19,8 +19,8 @@ data:
 'startTime(s)', 'AoINumber',  
 'AoIBCEA', 'AoIBCEADisp', 
 'AoILempelZiv',  
-'AoIStationaryEntropy', 'AoIJointEntropy',
- 'AoIConditionalEntropy' ,  'AoIMutualInformation' #
+#'AoIStationaryEntropy', 'AoIJointEntropy',
+# 'AoIConditionalEntropy' ,  'AoIMutualInformation' #
               ]
 
 general: 

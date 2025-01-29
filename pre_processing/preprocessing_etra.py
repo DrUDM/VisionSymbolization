@@ -56,8 +56,8 @@ def pre_processing():
              
             # Creating clean df
             data_l = dict({
-                 'gaze_x': x_,
-                 'gaze_y': y_,
+                 'gazeX': x_,
+                 'gazeY': y_,
                      })
              
             df_clean = pd.DataFrame(data=data_l) 
@@ -66,10 +66,10 @@ def pre_processing():
             df_clean = df_clean.interpolate(method='polynomial', order=1)
             
             # Out of bounds gaze samples 
-            x_ = df_clean['gaze_x'].values
+            x_ = df_clean['gazeX'].values
             status[x_>scr_dim[0]] = 0
             status[x_<0] = 0
-            y_ = df_clean['gaze_y'].values
+            y_ = df_clean['gazeY'].values
             status[y_>scr_dim[1]] = 0
             status[y_<0] = 0
             

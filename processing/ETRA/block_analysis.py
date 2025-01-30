@@ -440,8 +440,9 @@ def scanpath_features(segmentation):
                                             get_raw=False, 
                                             display_path=False)['fractal_dimension'])
     #scan_features.append(np.exp(geo_a.scanpath_k_coefficient(display_results=False)['k_coefficient']))
-    #scan_features.append(geo_a.scanpath_voronoi_cells(display_results=False, 
-    #                                                  get_raw=False)['gamma_parameter'])
+    scan_features.append(geo_a.scanpath_voronoi_cells(display_results=False, 
+                                                      get_raw=False, 
+                                                      display_path=False)['gamma_parameter'])
     ## Compute RQA descriptors
     rqa_a = v.RQAAnalysis(scanpath,  
                           verbose=False, 
@@ -498,17 +499,17 @@ def aoi_features(segmentation):
     
     ## Compute various entropies
     #start_time = time.time()
-    markov_a = v.MarkovBasedAnalysis(aoi, 
-                                     verbose=False, 
-                                     display_results=False, 
-                                     display_AoI_identification=False)  
+    # markov_a = v.MarkovBasedAnalysis(aoi, 
+    #                                  verbose=False, 
+    #                                  display_results=False, 
+    #                                  display_AoI_identification=False)  
     
-    entropies = markov_a.AoI_transition_entropy(display_results=False) 
+    # entropies = markov_a.AoI_transition_entropy(display_results=False) 
     
-    aoi_features.append(np.exp(entropies['AoI_transition_stationary_entropy']))
-    aoi_features.append(np.exp(entropies['AoI_transition_joint_entropy'])) 
-    aoi_features.append(np.exp(entropies['AoI_transition_conditional_entropy']))
-    aoi_features.append(np.exp(entropies['AoI_transition_mutual_information']))
+    # aoi_features.append(np.exp(entropies['AoI_transition_stationary_entropy']))
+    # aoi_features.append(np.exp(entropies['AoI_transition_joint_entropy'])) 
+    # aoi_features.append(np.exp(entropies['AoI_transition_conditional_entropy']))
+    # aoi_features.append(np.exp(entropies['AoI_transition_mutual_information']))
     #print(aoi_features)
     return aoi_features
     

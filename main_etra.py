@@ -134,15 +134,15 @@ if __name__ == '__main__':
                     if False:
                         clustering(config)
     if True:
-        if False:                 
+        if True:                 
             feature_extraction() 
-        if False:
+        if True:
             feature_normalization() 
         if True:
             segmentation() 
-        if True:
+        if False:
             symbolization()
-        if True:
+        if False:
             clustering()
                         
             

@@ -6,4 +6,8 @@ dataset/ADABase/data/
 dataset/ETRA/data/
 
 
-output/ETRA/
+output/ETRA/clustering/
+output/ETRA/normalized_features/
+output/ETRA/segmentation/
+output/ETRA/symbolization/
+output/ETRA/symbolization_GMCM/

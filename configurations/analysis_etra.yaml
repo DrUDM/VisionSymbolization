@@ -11,7 +11,7 @@ data:
               ]
      
     scanpath_features: [
-'startTime(s)', 'SpLength', 'SpBCEA' , 'SpConvexHull', 'SpFractalDimension', #'SpKCoefficient','SpVoronoi', 
+'startTime(s)', 'SpLength', 'SpBCEA' , 'SpConvexHull', 'SpFractalDimension',  #'SpKCoefficient','SpVoronoi', 
 'SpRQARecRate', 'SpRQADet', 'SpRQALam', 
               ]
               
@@ -19,8 +19,8 @@ data:
 'startTime(s)', 'AoINumber',  
 'AoIBCEA', 'AoIBCEADisp', 
 'AoILempelZiv',  
-#'AoIStationaryEntropy', 'AoIJointEntropy',
-# 'AoIConditionalEntropy' ,  'AoIMutualInformation' #
+'AoIStationaryEntropy', 'AoIJointEntropy',
+'AoIConditionalEntropy' ,  'AoIMutualInformation' #
               ]
 
 general: 
@@ -46,20 +46,20 @@ symbolization:
     
     segmentation:
         oculomotor:
-            nb_breakpoints: 14 #9 
+            nb_breakpoints: 9 #9 
         scanpath:
-            nb_breakpoints: 14 #9 
+            nb_breakpoints: 9 #9 
         aoi:
-            nb_breakpoints: 14 #9 
+            nb_breakpoints: 9 #9 
             
     nb_clusters:
-        oculomotor: 15 #25
-        scanpath: 15
-        aoi: 15
+        oculomotor: 20 #25
+        scanpath: 20
+        aoi: 20
         
     gmcm: 
         master_stepsize: !!float .5e-3 #.5e-3  
-        nb_steps: 350
+        nb_steps: 500
         distance: wasserstein
         
 clustering: 

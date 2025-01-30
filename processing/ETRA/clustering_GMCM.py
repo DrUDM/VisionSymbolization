@@ -176,9 +176,9 @@ class ClusteringGMCM():
         m_acc = []
         best, best_s, best_confmat = 0, None, None 
         
-        for state in range(0, 2000): 
+        for state in range(0, 1000): 
             accuracies = []
-            kf = KFold(n_splits=6, random_state=state, shuffle=True)
+            kf = KFold(n_splits=5, random_state=state, shuffle=True)
             
             if to_cluster == 'tasks':
                 conf_mat = np.zeros((len(conditions), len(conditions)))
@@ -241,7 +241,7 @@ class ClusteringGMCM():
                   colorbar=False, 
                   cmap='Blues') 
         plt.show() 
-        disp.figure_.savefig('output/ETRA/figures/clustering/copula_svm_accuracy_{n}.png'.format(n=len(conditions)), 
+        disp.figure_.savefig('output/ETRA/clustering/copula_svm_accuracy_{n}.png'.format(n=len(conditions)), 
                              dpi=250)
         plt.clf()
     

@@ -31,6 +31,7 @@ def process(config, path, feature_records):
         oculomotor_feature_records = [feature_record for feature_record in feature_records
                               if feature_record.split('.')[0].split('_')[-1] == 'oculomotor']
         process_oculomotor(config, path, oculomotor_feature_records)
+        print('...done \n')
         
     ## For scanpath features only
     if True:
@@ -38,14 +39,15 @@ def process(config, path, feature_records):
         scanpath_feature_records = [feature_record for feature_record in feature_records
                               if feature_record.split('.')[0].split('_')[-1] == 'scanpath']
         process_scanpath(config, path, scanpath_feature_records)
-            
+        print('...done \n')
+        
     ## For aoi sequence features 
     if True: 
         print('Segmenting aoi features...')
         aoi_feature_records = [feature_record for feature_record in feature_records
                               if feature_record.split('.')[0].split('_')[-1] == 'AoI']
         process_aoi(config, path, aoi_feature_records)
-   
+        print('...done \n')
         
    
 def process_aoi(config, path, feature_records, 
@@ -83,7 +85,7 @@ def process_aoi(config, path, feature_records,
             signal = df.to_numpy()[:,1:]
      
             bkps=signal_segmentation(signal,
-                                     nb_bkps,
+                                     None,
                                      )
             if display:
                 display_segmentation(signal, 
@@ -131,7 +133,7 @@ def process_scanpath(config, path, feature_records,
             signal = df_sp.to_numpy()
      
             bkps=signal_segmentation(signal,
-                                     nb_bkps,
+                                     None,
                                      )
             if display:
                 display_segmentation(signal, 
@@ -193,7 +195,7 @@ def process_oculomotor(config, path, feature_records,
             df_fix = df[[col for col in df.columns if col[:3]=='fix']] 
             signal_fix = df_fix.to_numpy()
             bkps=signal_segmentation(signal_fix,
-                                     nb_bkps,
+                                     None,
                                      )
             if display:
                 display_segmentation(signal_fix, 
@@ -209,7 +211,7 @@ def process_oculomotor(config, path, feature_records,
             df_sac = df[[col for col in df.columns if col[:3]=='sac']] 
             signal_sac = df_sac.to_numpy()
             bkps=signal_segmentation(signal_sac,
-                                     nb_bkps,
+                                     None,
                                      )
             if display:
                 display_segmentation(signal_sac, 

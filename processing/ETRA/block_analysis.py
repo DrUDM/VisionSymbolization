@@ -469,6 +469,10 @@ def aoi_features(segmentation):
         DESCRIPTION.
 
     ''' 
+    import time
+    
+    
+
     aoi_features = []
     
     aoi = v.AoISequence(segmentation, 
@@ -493,16 +497,18 @@ def aoi_features(segmentation):
     aoi_features.append(lz['AoI_lempel_ziv_complexity'])
     
     ## Compute various entropies
-    # markov_a = v.MarkovBasedAnalysis(aoi, 
-    #                                  verbose=False, 
-    #                                  display_results=False, 
-    #                                  display_AoI_identification=False)  
-    # entropies = markov_a.AoI_transition_entropy() 
- 
-    # aoi_features.append(np.exp(entropies['AoI_transition_stationary_entropy']))
-    # aoi_features.append(np.exp(entropies['AoI_transition_joint_entropy']))
-    # aoi_features.append(np.exp(entropies['AoI_transition_conditional_entropy']))
-    # aoi_features.append(np.exp(entropies['AoI_transition_mutual_information']))
+    #start_time = time.time()
+    markov_a = v.MarkovBasedAnalysis(aoi, 
+                                     verbose=False, 
+                                     display_results=False, 
+                                     display_AoI_identification=False)  
+    
+    entropies = markov_a.AoI_transition_entropy(display_results=False) 
+    
+    aoi_features.append(np.exp(entropies['AoI_transition_stationary_entropy']))
+    aoi_features.append(np.exp(entropies['AoI_transition_joint_entropy'])) 
+    aoi_features.append(np.exp(entropies['AoI_transition_conditional_entropy']))
+    aoi_features.append(np.exp(entropies['AoI_transition_mutual_information']))
     #print(aoi_features)
     return aoi_features
     

@@ -123,7 +123,8 @@ def process_normalization(config, path,
                 dict_norm.update({feature: feat_params})
         
     ## Re-iterate to normalize according to n_params
-    for file in data.keys():  
+    for file in data.keys(): 
+        print('\nAnalyzing file {rec_}'.format(rec_=file))
         subject, trial, task, condition, stimulus, _ = file.split('.')[0].split('_')
         l_data = data[file]
         new_data = dict({})

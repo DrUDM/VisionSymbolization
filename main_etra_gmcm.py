@@ -140,7 +140,7 @@ if __name__ == '__main__':
             feature_normalization() 
         if False:
             segmentation() 
-        if False:
+        if True:
             symbolization()
         if True:
             clustering()

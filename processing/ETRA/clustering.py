@@ -322,7 +322,7 @@ class Clustering():
        
         #1546
         
-        for state in range(0, 200): 
+        for state in range(0, 1000): 
             accuracies = []
             kf = KFold(n_splits=5, random_state=state, shuffle=True)
             conf_mat = np.zeros((len(conditions), len(conditions)))
@@ -379,9 +379,9 @@ class Clustering():
         disp.plot(values_format='', 
                   colorbar=False, 
                   cmap='Blues')
-   
+        plt.grid(False) 
         plt.show() 
-        disp.figure_.savefig('output/ETRA/figures/clustering/svm_accuracy_{n}.png'.format(n=len(conditions)), 
+        disp.figure_.savefig('output/ETRA/clustering/svm_accuracy_{n}.png'.format(n=len(conditions)), 
                              dpi=250)
         plt.clf()
     

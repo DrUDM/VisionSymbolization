@@ -174,7 +174,7 @@ def process_scanpath_features_(segmentation, config, record):
             pass 
  
     filename='output/ETRA/features/{r_}_scanpath.csv'.format(r_=record.split('.')[0])
-    result_df.to_csv(filename, index=False)           
+    result_df.to_csv(filename, index=False)            
             
             
 def process_aoi_features_(segmentation, config, record):
@@ -440,9 +440,9 @@ def scanpath_features(segmentation):
                                             get_raw=False, 
                                             display_path=False)['fractal_dimension'])
     #scan_features.append(np.exp(geo_a.scanpath_k_coefficient(display_results=False)['k_coefficient']))
-    scan_features.append(geo_a.scanpath_voronoi_cells(display_results=False, 
-                                                      get_raw=False, 
-                                                      display_path=False)['gamma_parameter'])
+    #scan_features.append(geo_a.scanpath_voronoi_cells(display_results=False, 
+    #                                                  get_raw=False, 
+    #                                                  display_path=False)['gamma_parameter'])
     ## Compute RQA descriptors
     rqa_a = v.RQAAnalysis(scanpath,  
                           verbose=False, 

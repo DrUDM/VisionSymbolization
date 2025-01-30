@@ -11,7 +11,7 @@ data:
               ]
      
     scanpath_features: [
-'startTime(s)', 'SpLength', 'SpBCEA' , 'SpConvexHull', 'SpFractalDimension', 'SpVoronoi', #'SpKCoefficient', 
+'startTime(s)', 'SpLength', 'SpBCEA' , 'SpConvexHull', 'SpFractalDimension', #'SpVoronoi', 'SpKCoefficient', 
 'SpRQARecRate', 'SpRQADet', 'SpRQALam', 
               ]
               

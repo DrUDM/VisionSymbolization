@@ -3,6 +3,9 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.figure_factory as ff
+
+import seaborn as sns
 import pickle 
 
 from sklearn.cluster import KMeans, SpectralClustering 
@@ -259,7 +262,8 @@ def process_subset(config, path,
         result_dict = dict({})
         result_dict.update({'centers': np.array(ordered_centers), 
                             'recordings': dict({})}) 
-        for record in feature_records:   
+        for record in feature_records:
+             
             sub_data = []
             lengths = []
             df = pd.read_csv(path+record)[feature_set]  
@@ -281,6 +285,7 @@ def process_subset(config, path,
               
             sub_data=np.array(sub_data)
             labs_ = kmeans.predict(sub_data)
+        
             ordered_labs_ = re_ordering(labs_) 
             lengths = list(np.array(lengths)) 
             name = '{sub_}_{tri_}_{tas_}_{con_}_{sti_}'.format(sub_=subject_,
@@ -291,6 +296,11 @@ def process_subset(config, path,
             result_dict['recordings'].update({name: dict()})
             result_dict['recordings'][name].update({'sequence': ordered_labs_, 
                                                     'lengths': lengths}) 
+            
+            #if record == '019_038_FreeViewing_Natural_nat005_oculomotor.csv': 
+            #    plot_scarf(ordered_labs_, lengths)
+            
+            
             for lab in ordered_labs_:
                 rez.append(lab)
         #print(rez) 
@@ -378,6 +388,69 @@ def compute_serial_matrix(dist_mat,method="ward"):
             
             
             
-            
+def plot_scarf(labels, lenghts):
+    """
+
+
+    Parameters
+    ----------
+    df : TYPE
+        DESCRIPTION.
+    m_len : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    None.
+
+    """
+
+    s_lengths = np.zeros((len(lenghts)+1)) 
+    s_lengths[1:] = np.cumsum(lenghts)
+    
+    
+    starts = s_lengths[:-1]
+    ends = s_lengths[1:]
+    ressources = labels
+    
+    df = pd.DataFrame(
+        [
+            dict(Task="0", Start=starts[i], Finish=ends[i], Resource=ressources[i])
+            for i in range(len(starts))
+        ]
+    )
+  
+    colors_sns = sns.color_palette("viridis", n_colors=len(set(labels)))
+    d_c = dict()
+   
+    for i, idx in enumerate(sorted(list(set(labels)))):
+        d_c.update({idx: colors_sns[i]})
+ 
+    colors = dict({})
+    for i, c in enumerate(labels):
+        colors.update({c: d_c[c]})
+
+    ## Create a scarf plot
+    fig = ff.create_gantt(
+        df,
+        index_col="Resource",
+        bar_width=0.4,
+        show_colorbar=True,
+        group_tasks=True,
+        colors=colors,
+    )
+    ## Update the layout
+    fig.update_layout(
+        xaxis_type="linear",
+        height=400,
+        width=max(300, len(starts) * 80),
+        xaxis_title="Time (s)",
+        yaxis_title="AoI sequence index", 
+        legend=dict(title=dict(text="Clusters")),
+    )
+
+    fig.show()
+    
+    return fig       
             
             

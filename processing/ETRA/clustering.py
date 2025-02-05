@@ -305,7 +305,10 @@ class Clustering():
             t_dist += dist_dict[k_]**2
         t_dist=np.sqrt(t_dist)
         ordered_t_dist, _, _ = compute_serial_matrix(t_dist, 'ward')
-        plt.imshow(ordered_t_dist)
+        plt.imshow(ordered_t_dist, cmap='viridis')
+        plt.grid(None)
+        plt.xlabel("Recordings", fontsize = 15)
+        plt.ylabel("Recordings", fontsize = 15)
         plt.show()
         plt.clf()
         ## Embedding in an enclidean metric space from distance matrix

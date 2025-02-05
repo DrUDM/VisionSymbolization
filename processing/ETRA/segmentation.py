@@ -146,7 +146,7 @@ def process_scanpath(config, path, feature_records,
         
         
 def process_oculomotor(config, path, feature_records, 
-                       display=False):
+                       display=True):
     '''
     
 
@@ -168,6 +168,7 @@ def process_oculomotor(config, path, feature_records,
     outpath = 'output/ETRA/segmentation/'
  
     for record in feature_records: 
+        ##print(record)
         subject, trial, task, condition, stimulus, _ = record.split('.')[0].split('_')
         
         if (subject in config['data']['subject_set']
@@ -176,7 +177,7 @@ def process_oculomotor(config, path, feature_records,
             
             df = pd.read_csv(path+record) 
             name = record.split('.')[0]
-     
+        
             ## Full signal segmentation
             #signal = df.to_numpy()[:,1:]
             #bkps=signal_segmentation(signal,
@@ -197,10 +198,10 @@ def process_oculomotor(config, path, feature_records,
             bkps=signal_segmentation(signal_fix,
                                      None,
                                      )
-            if display:
-                display_segmentation(signal_fix, 
-                                     bkps, 
-                                     name+'_fixationFeatures')
+            #if display: 
+            #    display_segmentation(signal_fix, 
+            #                         bkps, 
+            #                         name+'_fixationFeatures')
             bkps.insert(0, 0)
             filename = '{out_}{name_}Fixation.npy'.format(out_=outpath, 
                                                           name_=name)
@@ -211,9 +212,10 @@ def process_oculomotor(config, path, feature_records,
             df_sac = df[[col for col in df.columns if col[:3]=='sac']] 
             signal_sac = df_sac.to_numpy()
             bkps=signal_segmentation(signal_sac,
-                                     None,
+                                     None, 
                                      )
             if display:
+              if name == "019_038_FreeViewing_Natural_nat005_oculomotor":
                 display_segmentation(signal_sac, 
                                      bkps, 
                                      name+'_saccadeFeatures')
@@ -258,7 +260,8 @@ def signal_segmentation(signal,
     return my_bkps
     
  
-def display_segmentation(signal, my_bkps, name=None):
+def display_segmentation(signal, my_bkps, name=None,
+                         ):
     '''
     
 
@@ -278,7 +281,7 @@ def display_segmentation(signal, my_bkps, name=None):
     '''
     
     plt.style.use("seaborn-v0_8")  
-    
+  
     plt.plot(signal)
     for x in my_bkps[:-1]:
         plt.axvline(x = x-1, color = 'indianred', 
@@ -290,8 +293,15 @@ def display_segmentation(signal, my_bkps, name=None):
   
     fig = plt.figure()
     ax = fig.add_subplot(111)  
-    ax.imshow(signal.T, aspect=2.5, cmap='viridis', vmin=0, vmax=1)
+    ax.imshow(signal.T, aspect=4, cmap='viridis', vmin=0, vmax=1)
     ax.grid(None)
+     
+    ax.set_xlabel("Time windows", fontsize = 15)
+    ax.set_ylabel("Features", fontsize = 15)
+    
+    plt.yticks([])
+    plt.savefig("output/ETRA/figures/segmentation/{name}.png".format(name=name), dpi=150)
+    
     plt.show()
     plt.clf()
     
@@ -299,16 +309,18 @@ def display_segmentation(signal, my_bkps, name=None):
     ax = fig.add_subplot(111) 
     
     
-    ax.imshow(signal.T, aspect=2.5, cmap='viridis', vmin=0, vmax=1)
+    ax.imshow(signal.T, aspect=4, cmap='viridis', vmin=0, vmax=1)
     ax.grid(None)
     
     for x in my_bkps[:-1]:
-        ax.axvline(x = x-.5, color = 'indianred', 
-                    linewidth=5, linestyle='dashed')
-    #if name is not None:
-    #    ax.title(name)
-         
-   
+        ax.axvline(x = x-.5, color = 'red', 
+                    linewidth=3, linestyle='dashed') 
+        
+    ax.set_xlabel("Time windows", fontsize = 15)
+    ax.set_ylabel("Features", fontsize = 15)
+    
+    plt.yticks([])
+    plt.savefig("output/ETRA/figures/segmentation/{name}_segmented.png".format(name=name), dpi=150)
     plt.show()
     plt.clf()
     

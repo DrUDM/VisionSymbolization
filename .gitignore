@@ -5,7 +5,7 @@ dataset/test/
 dataset/ADABase/data/
 dataset/ETRA/data/
 
-
+output/ETRA/figures/
 output/ETRA/clustering/
 output/ETRA/normalized_features/
 output/ETRA/segmentation/

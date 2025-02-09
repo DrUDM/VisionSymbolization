@@ -2,7 +2,7 @@
 data: 
     subject_set: ['009', '019', '022', '058', '059', '060', '062', 'SMC']  #['009', '019', '022', '058', '059', '060', '062', 'SMC']  
     task_set: ['FreeViewing'] 
-    condition_set: [ 'Puzzle', 'Natural', 'Blank', 'Waldo'] #['Puzzle', 'Natural', 'Blank', 'Waldo']
+    condition_set: [ 'Puzzle', 'Blank', 'Waldo'] #['Puzzle', 'Natural', 'Blank', 'Waldo']
     
     oculomotor_features: [
 'startTime(s)', 'fixFreq', 'fixVel', 'fixDriftDisplacement', 'fixDriftDist', 'fixDriftVel', 'fixBCEA', #'  

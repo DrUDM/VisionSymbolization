@@ -297,8 +297,8 @@ def process_subset(config, path,
             result_dict['recordings'][name].update({'sequence': ordered_labs_, 
                                                     'lengths': lengths}) 
             
-            #if record == '019_038_FreeViewing_Natural_nat005_oculomotor.csv': 
-            #    plot_scarf(ordered_labs_, lengths)
+            if record == '019_067_FreeViewing_Puzzle_puz007_oculomotor.csv': 
+                plot_scarf(ordered_labs_, lengths)
             
             
             for lab in ordered_labs_:
@@ -420,11 +420,11 @@ def plot_scarf(labels, lenghts):
         ]
     )
   
-    colors_sns = sns.color_palette("viridis", n_colors=len(set(labels)))
+    colors_sns = sns.color_palette("viridis", n_colors=20)
     d_c = dict()
    
-    for i, idx in enumerate(sorted(list(set(labels)))):
-        d_c.update({idx: colors_sns[i]})
+    for idx in (sorted(list(set(labels)))):
+        d_c.update({idx: colors_sns[idx]})
  
     colors = dict({})
     for i, c in enumerate(labels):

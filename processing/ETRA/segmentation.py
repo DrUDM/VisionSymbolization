@@ -215,7 +215,8 @@ def process_oculomotor(config, path, feature_records,
                                      None, 
                                      )
             if display:
-              if name == "019_038_FreeViewing_Natural_nat005_oculomotor":
+              if name == '019_038_FreeViewing_Natural_nat005_oculomotor':  #"019_038_FreeViewing_Natural_nat005_oculomotor" "'019_067_FreeViewing_Puzzle_puz007_oculomotor.csv'" "019_092_FreeViewing_Waldo__oculomotor"
+                print(name)
                 display_segmentation(signal_sac, 
                                      bkps, 
                                      name+'_saccadeFeatures')
@@ -316,10 +317,13 @@ def display_segmentation(signal, my_bkps, name=None,
         ax.axvline(x = x-.5, color = 'red', 
                     linewidth=3, linestyle='dashed') 
         
-    ax.set_xlabel("Time windows", fontsize = 15)
-    ax.set_ylabel("Features", fontsize = 15)
+    ax.set_xlabel("Time windows", fontsize = 22)
+    ax.set_ylabel("Features", fontsize = 22)
     
+    #plt.yticks(np.arange(7), ['sacFreq', 'sacAmp',   'sacEfficiency', 'sacPeakVel' , 'sacPeakAcc', 'sacSkewnessExponent', 'sacPeakVelAmpRatio' ])
     plt.yticks([])
+    plt.xticks(fontsize=16)
+    plt.tight_layout()
     plt.savefig("output/ETRA/figures/segmentation/{name}_segmented.png".format(name=name), dpi=150)
     plt.show()
     plt.clf()

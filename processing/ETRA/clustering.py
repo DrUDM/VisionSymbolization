@@ -6,7 +6,7 @@ import kmedoids
 import matplotlib.pyplot as plt   
 from scipy.spatial.distance import squareform
 from fastcluster import linkage
-from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
  
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
@@ -307,8 +307,10 @@ class Clustering():
         ordered_t_dist, _, _ = compute_serial_matrix(t_dist, 'ward')
         plt.imshow(ordered_t_dist, cmap='viridis')
         plt.grid(None)
-        plt.xlabel("Recordings", fontsize = 15)
-        plt.ylabel("Recordings", fontsize = 15)
+        plt.xlabel("Recordings", fontsize = 22)
+        plt.xticks(fontsize=16)
+        plt.ylabel("Recordings", fontsize = 22)
+        plt.yticks(fontsize=16)
         plt.show()
         plt.clf()
         ## Embedding in an enclidean metric space from distance matrix
@@ -326,6 +328,7 @@ class Clustering():
         #1546
         
         for state in range(0, 1000): 
+          #if state==779:
             accuracies = []
             kf = KFold(n_splits=5, random_state=state, shuffle=True)
             conf_mat = np.zeros((len(conditions), len(conditions)))
@@ -376,13 +379,20 @@ class Clustering():
         print(best_confmat)
         #print(np.mean(m_acc))
        
-        disp=ConfusionMatrixDisplay(best_confmat, 
-                                    display_labels=clf.classes_, 
+        disp=ConfusionMatrixDisplay(best_confmat.astype(int), 
+                                    display_labels=clf.classes_,  
                                     )
         disp.plot(values_format='', 
                   colorbar=False, 
                   cmap='Blues')
+        for labels in disp.text_.ravel():
+            labels.set_fontsize(16)
         plt.grid(False) 
+        plt.xticks(fontsize = 16)
+        plt.xlabel('Predicted label', fontsize=20)
+        plt.yticks(fontsize = 16)
+        plt.ylabel('True label', fontsize=20)
+        plt.tight_layout()
         plt.show() 
         disp.figure_.savefig('output/ETRA/clustering/svm_accuracy_{n}.png'.format(n=len(conditions)), 
                              dpi=250)

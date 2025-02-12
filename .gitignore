@@ -1,7 +1,4 @@
-dataset/COLET/
-dataset/eSEEd_v2/ 
-dataset/test/
-
+dataset/COLET/data/
 dataset/ADABase/data/
 dataset/ETRA/data/
 
@@ -11,3 +8,9 @@ output/ETRA/normalized_features/
 output/ETRA/segmentation/
 output/ETRA/symbolization/
 output/ETRA/symbolization_GMCM/
+
+output/ADABase/normalized_features/
+output/ADABase/figures/
+output/ADABase/clustering/
+output/ADABase/segmentation/
+output/ADABase/symbolization/

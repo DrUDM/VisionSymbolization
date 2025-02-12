@@ -1,4 +1,4 @@
-gaze_x,gaze_y,status,timestamp
+gazeX,gazeY,status,timestamp
 ,,0,0.0
 ,,0,0.004
 ,,0,0.008

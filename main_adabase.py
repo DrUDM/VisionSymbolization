@@ -84,7 +84,7 @@ def symbolization(config=None):
         with open('configurations/analysis_adabase.yaml', 'r') as file:
             config = yaml.safe_load(file) 
             
-    path = 'output/results/ADABAse/normalized_features/'
+    path = 'output/ADABAse/normalized_features/'
     feature_records = [f for f in os.listdir(path) if f[-4:] == '.csv']
 
     symb_a = sy.Symbolization(config, path, feature_records) 
@@ -118,13 +118,13 @@ if __name__ == '__main__':
     if True:
         if False:                 
             feature_extraction() 
-        if False:
+        if True:
             feature_normalization() 
         if True:
             segmentation() 
-        if False:
+        if True:
             symbolization()
-        if False:
+        if True:
             clustering()
                         
             

@@ -75,12 +75,19 @@ class Clustering():
         None.
 
         '''
-        dict_task = dict({'nback_baseline_2': 'low_wl', 
+        dict_task = dict({'nback_baseline_1': 'low_wl',  
+                          'nback_baseline_2': 'low_wl', 
                           'nback_test_1': 'low_wl', 
                           'kdrive_baseline_1': 'low_wl',
                           'kdrive_baseline_2': 'low_wl',
+                          'kdrive_baseline_3': 'low_wl',
+                          
                           'nback_test_2': 'high_wl', 
                           'nback_test_3': 'high_wl', 
+                          'nback_test_4': 'high_wl',
+                          'nback_test_5': 'high_wl',
+                          'nback_test_6': 'high_wl',
+                          'kdrive_test_1': 'high_wl',
                           'kdrive_test_2': 'high_wl',
                           'kdrive_test_3': 'high_wl',
                           })
@@ -233,7 +240,7 @@ class Clustering():
                   cmap='Blues')
    
         plt.show() 
-        disp.figure_.savefig('output/results/ETRA/figures/clustering/svm_accuracy_{n}.png'.format(n=len(conditions)), 
+        disp.figure_.savefig('output/ADABAse/clustering/svm_accuracy_{n}.png'.format(n=len(conditions)), 
                              dpi=250)
         plt.clf()
     

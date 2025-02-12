@@ -90,6 +90,7 @@ class Segmentation():
             subject, study, phase, level, _ = record.split('.')[0].split('_')
             label = '_'.join([study, phase, level])
             if subject in self.config['data']['subject_set'] and label in self.config['data']['label_set']:
+            
                 df = pd.read_csv(self.path+record)  
                 name = record.split('.')[0] 
                 
@@ -116,7 +117,7 @@ class Segmentation():
                                          )
                 if display:
                   #if name == '019_038_FreeViewing_Natural_nat005_oculomotor':  #"019_038_FreeViewing_Natural_nat005_oculomotor" "'019_067_FreeViewing_Puzzle_puz007_oculomotor.csv'" "019_092_FreeViewing_Waldo__oculomotor"
-                    print(name)
+                   
                     self.display_segmentation(signal_sac, 
                                          bkps, 
                                          name+'_saccadeFeatures')

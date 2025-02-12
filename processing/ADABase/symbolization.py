@@ -108,7 +108,7 @@ class Symbolization():
         None.
 
         '''
-        bkpt_path = 'output/results/ADABase/segmentation/'
+        bkpt_path = 'output/ADABase/segmentation/'
         if type_=='scanpath':
             n_centers = self.config['symbolization']['nb_clusters']['scanpath']     
         elif type_=='AoI':
@@ -124,10 +124,14 @@ class Symbolization():
                 label = '_'.join([study, phase, level])
                 if subject in self.config['data']['subject_set'] and label in self.config['data']['label_set']:
                     df = pd.read_csv(self.path+record)[feature_set]  
+                     
                     df = df.to_numpy()  
-                    name = record.split('.')[0] 
-                    bkpt_name = '{n_}.npy'.format(n_=name)
-                    bkpts = np.load(bkpt_path+bkpt_name) 
+                    name = record.split('.')[0]  
+                    bkpt_name = '{s_}_{l_}_{type_}.npy'.format(s_=subject,
+                                                               l_=label,
+                                                               type_=type_)
+                   
+                    bkpts = np.load(bkpt_path+bkpt_name, allow_pickle=True ) 
                     for i in range(1, len(bkpts)):
                         l_data = df[bkpts[i-1]: bkpts[i]] 
                         l_means = np.mean(l_data, axis=0) 
@@ -173,7 +177,9 @@ class Symbolization():
                     df = pd.read_csv(self.path+record)[feature_set]  
                     df = df.to_numpy() 
                     name = record.split('.')[0] 
-                    bkpt_name = '{n_}.npy'.format(n_=name)
+                    bkpt_name = '{s_}_{l_}_{type_}.npy'.format(s_=subject,
+                                                               l_=label,
+                                                               type_=type_)
                     bkpts = np.load(bkpt_path+bkpt_name) 
                     for i in range(1, len(bkpts)): 
                         l_data = df[bkpts[i-1]: bkpts[i]] 
@@ -191,7 +197,7 @@ class Symbolization():
                     result_dict['recordings'].update({name: dict()})
                     result_dict['recordings'][name].update({'sequence': ordered_labs_, 
                                                             'lengths': lengths}) 
-            filename = '{outpath}/{type_}.pkl'.format(outpath='output/results/ADABase/symbolization',  
+            filename = '{outpath}/{type_}.pkl'.format(outpath='output/ADABase/symbolization',  
                                                       type_=type_)
             with open(filename, 'wb') as fp:
                 pickle.dump(result_dict, fp)   
